@@ -1,0 +1,1250 @@
+@tailwind utilities;
+
+/*
+ * Global design system
+ *
+ * Keep visual decisions in this file so pages and components stay consistent.
+ * Components should use these tokens and utility classes instead of adding
+ * one-off colors, shadows, or spacing values.
+ */
+
+:root {
+  /* Brand palette: warm, premium, and welcoming for student housing. */
+  --color-ink: #172329;
+  --color-ink-muted: #5c6b70;
+  --color-surface: #ffffff;
+  --color-surface-soft: #f5f8f6;
+  --color-surface-warm: #fff9ef;
+  --color-border: #dce6e1;
+  --color-brand: #0f766e;
+  --color-brand-dark: #0a5b55;
+  --color-brand-soft: #dff2ed;
+  --color-accent: #e59b45;
+  --color-accent-soft: #fff0d9;
+  --color-success: #2f855a;
+  --color-danger: #b74444;
+
+  /* Typography scale and font stacks. */
+  --font-sans: "Avenir Next", Avenir, "Segoe UI", sans-serif;
+  --font-display: Georgia, "Times New Roman", serif;
+  --text-xs: 0.75rem;
+  --text-sm: 0.875rem;
+  --text-base: 1rem;
+  --text-lg: 1.125rem;
+  --text-xl: 1.375rem;
+  --text-2xl: 1.75rem;
+  --text-3xl: clamp(2rem, 4vw, 3.5rem);
+
+  /* Layout and shape tokens. */
+  --content-width: 76rem;
+  --radius-sm: 0.5rem;
+  --radius-md: 0.75rem;
+  --radius-lg: 1.25rem;
+  --radius-pill: 999px;
+  --space-section: clamp(4rem, 8vw, 7rem);
+
+  /* Elevation tokens. */
+  --shadow-sm: 0 0.25rem 1rem rgba(23, 35, 41, 0.06);
+  --shadow-md: 0 0.75rem 2rem rgba(23, 35, 41, 0.1);
+  --shadow-focus: 0 0 0 0.2rem rgba(15, 118, 110, 0.2);
+}
+
+/* A predictable baseline makes the design system behave consistently. */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: var(--color-surface);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  font-size: var(--text-base);
+  line-height: 1.6;
+  text-rendering: optimizeLegibility;
+}
+
+h1,
+h2,
+h3,
+h4,
+p {
+  margin: 0;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--font-display);
+  line-height: 1.15;
+  letter-spacing: 0;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button,
+a {
+  -webkit-tap-highlight-color: transparent;
+}
+
+button {
+  font: inherit;
+}
+
+:focus-visible {
+  outline: 0.15rem solid var(--color-accent);
+  outline-offset: 0.2rem;
+  box-shadow: var(--shadow-focus);
+}
+
+/* Shared layout utilities. */
+.container {
+  width: min(calc(100% - 2rem), var(--content-width));
+  margin-inline: auto;
+}
+
+.section-padding {
+  padding-block: var(--space-section);
+}
+
+/* Shared controls. Use these classes for all primary actions. */
+.btn-primary,
+.btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.55rem;
+  min-height: 2.9rem;
+  padding: 0.7rem 1.15rem;
+  border: 0.0625rem solid transparent;
+  border-radius: var(--radius-pill);
+  font-size: var(--text-sm);
+  font-weight: 700;
+  line-height: 1;
+  transition: background-color 180ms ease, border-color 180ms ease, color 180ms ease, transform 180ms ease;
+}
+
+.btn-primary {
+  background: var(--color-brand);
+  color: var(--color-surface);
+}
+
+.btn-primary:hover {
+  background: var(--color-brand-dark);
+  transform: translateY(-0.1rem);
+}
+
+.btn-secondary {
+  border-color: var(--color-border);
+  background: var(--color-surface);
+  color: var(--color-brand-dark);
+}
+
+.btn-secondary:hover {
+  border-color: var(--color-brand);
+  background: var(--color-brand-soft);
+}
+
+/* Shared header styles. The desktop and mobile layouts use one markup path. */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  border-bottom: 0.0625rem solid rgba(220, 230, 225, 0.85);
+  background: rgba(255, 255, 255, 0.94);
+  backdrop-filter: blur(0.8rem);
+}
+
+.site-nav {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 4.75rem;
+  gap: 1rem;
+}
+
+.brand-mark {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.7rem;
+  flex-shrink: 0;
+}
+
+.brand-mark__icon {
+  display: grid;
+  width: 2.35rem;
+  height: 2.35rem;
+  place-items: center;
+  border-radius: 0.7rem;
+  background: var(--color-brand);
+  color: var(--color-surface);
+  font-family: var(--font-display);
+  font-size: 1.4rem;
+  font-weight: 700;
+}
+
+.brand-mark__name {
+  display: grid;
+  color: var(--color-ink);
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.brand-mark__name small {
+  margin-top: 0.25rem;
+  color: var(--color-ink-muted);
+  font-family: var(--font-sans);
+  font-size: 0.625rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.site-nav__links {
+  display: flex;
+  align-items: center;
+  gap: clamp(1rem, 2.5vw, 2rem);
+}
+
+.site-nav__link {
+  color: var(--color-ink-muted);
+  font-size: var(--text-sm);
+  font-weight: 600;
+  transition: color 180ms ease;
+}
+
+.site-nav__link:hover {
+  color: var(--color-brand);
+}
+
+.site-nav__mobile-cta,
+.site-nav__menu-toggle {
+  display: none;
+}
+
+/* Footer styles deliberately stay quiet so the contact details remain easy to scan. */
+.site-footer {
+  padding-top: 4rem;
+  background: var(--color-ink);
+  color: var(--color-surface);
+}
+
+.site-footer__grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.5fr) repeat(2, minmax(0, 1fr));
+  gap: 3rem;
+  padding-bottom: 3rem;
+}
+
+.brand-mark--footer .brand-mark__name {
+  color: var(--color-surface);
+}
+
+.brand-mark--footer .brand-mark__name small {
+  color: #a8bbb5;
+}
+
+.site-footer__brand p {
+  max-width: 19rem;
+  margin-top: 1.25rem;
+  color: #b9c8c3;
+  font-size: var(--text-sm);
+}
+
+.site-footer__heading {
+  margin-bottom: 1.15rem;
+  color: var(--color-surface);
+  font-family: var(--font-sans);
+  font-size: var(--text-sm);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.site-footer__links,
+.site-footer__contact {
+  display: grid;
+  gap: 0.7rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-size: var(--text-sm);
+  font-style: normal;
+}
+
+.site-footer__links a,
+.site-footer__contact a {
+  display: inline-flex;
+  align-items: flex-start;
+  gap: 0.6rem;
+  color: #b9c8c3;
+  transition: color 180ms ease;
+}
+
+.site-footer__links a:hover,
+.site-footer__contact a:hover {
+  color: var(--color-surface);
+}
+
+.site-footer__contact svg {
+  flex: 0 0 auto;
+  color: var(--color-accent);
+  margin-top: 0.15rem;
+}
+
+.site-footer__contact-icon {
+  display: inline-grid;
+  width: 1.1rem;
+  height: 1.1rem;
+  place-items: center;
+  border: 0.0625rem solid var(--color-accent);
+  border-radius: 50%;
+  color: var(--color-accent);
+  font-size: 0.65rem;
+  font-weight: 800;
+}
+
+.site-footer__bottom {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  padding-block: 1.25rem;
+  border-top: 0.0625rem solid rgba(220, 230, 225, 0.18);
+  color: #8fa49d;
+  font-size: var(--text-xs);
+}
+
+/* Rooms listing and detail surfaces. These selectors use only the global tokens above. */
+.rooms-page,
+.room-detail-page {
+  background: var(--color-surface-soft);
+}
+
+.rooms-hero {
+  padding-block: clamp(4.5rem, 10vw, 8rem);
+  background: var(--color-surface-warm);
+}
+
+.rooms-hero__content {
+  max-width: 50rem;
+}
+
+.eyebrow {
+  margin-bottom: 0.85rem;
+  color: var(--color-brand);
+  font-size: var(--text-xs);
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.rooms-hero h1 {
+  max-width: 44rem;
+  font-size: var(--text-3xl);
+}
+
+.rooms-hero__content > p:last-child {
+  max-width: 35rem;
+  margin-top: 1.25rem;
+  color: var(--color-ink-muted);
+  font-size: var(--text-lg);
+}
+
+.rooms-content {
+  min-height: 32rem;
+}
+
+.rooms-toolbar {
+  display: flex;
+  align-items: flex-end;
+  gap: 1rem;
+  padding: 1rem;
+  border: 0.0625rem solid var(--color-border);
+  border-radius: var(--radius-lg);
+  background: var(--color-surface);
+  box-shadow: var(--shadow-sm);
+}
+
+.rooms-toolbar__intro {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  margin-right: auto;
+  color: var(--color-brand-dark);
+  font-weight: 800;
+}
+
+.filter-control {
+  display: grid;
+  min-width: 10.5rem;
+  gap: 0.35rem;
+  color: var(--color-ink-muted);
+  font-size: var(--text-xs);
+  font-weight: 700;
+}
+
+.filter-control select {
+  min-height: 2.7rem;
+  padding: 0.4rem 2rem 0.4rem 0.7rem;
+  border: 0.0625rem solid var(--color-border);
+  border-radius: var(--radius-sm);
+  background: var(--color-surface);
+  color: var(--color-ink);
+  cursor: pointer;
+  font-size: var(--text-sm);
+}
+
+.rooms-results-heading {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-block: 2.25rem 1.25rem;
+  color: var(--color-ink-muted);
+  font-size: var(--text-sm);
+}
+
+.rooms-results-heading strong {
+  color: var(--color-ink);
+}
+
+.rooms-results-heading__hint {
+  color: var(--color-brand);
+}
+
+.room-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1.25rem;
+}
+
+.room-card {
+  overflow: hidden;
+  border: 0.0625rem solid var(--color-border);
+  border-radius: var(--radius-lg);
+  background: var(--color-surface);
+  box-shadow: var(--shadow-sm);
+}
+
+.room-card__image-wrap {
+  position: relative;
+  aspect-ratio: 1.25;
+  overflow: hidden;
+  background: var(--color-brand-soft);
+}
+
+.room-card__image,
+.room-gallery img {
+  object-fit: cover;
+  transition: transform 300ms ease;
+}
+
+.room-card:hover .room-card__image {
+  transform: scale(1.03);
+}
+
+.availability-badge {
+  position: absolute;
+  top: 0.85rem;
+  left: 0.85rem;
+  z-index: 1;
+  padding: 0.35rem 0.65rem;
+  border-radius: var(--radius-pill);
+  font-size: var(--text-xs);
+  font-weight: 800;
+}
+
+.availability-badge--open {
+  background: var(--color-brand-soft);
+  color: var(--color-brand-dark);
+}
+
+.availability-badge--waitlist {
+  background: var(--color-accent-soft);
+  color: var(--color-ink);
+}
+
+.room-card__body {
+  padding: 1.25rem;
+}
+
+.room-card__type,
+.detail-label {
+  color: var(--color-ink-muted);
+  font-size: var(--text-xs);
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.room-card h2 {
+  margin-top: 0.35rem;
+  font-size: var(--text-xl);
+}
+
+.room-card__meta {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.75rem;
+  margin-top: 1rem;
+  color: var(--color-ink-muted);
+  font-size: var(--text-sm);
+}
+
+.room-card__meta span {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.room-card__meta svg {
+  color: var(--color-brand);
+}
+
+.room-card__meta strong {
+  color: var(--color-ink);
+}
+
+.room-card__link {
+  width: 100%;
+  margin-top: 1.25rem;
+}
+
+.empty-state {
+  padding: 4rem 1rem;
+  border: 0.0625rem dashed var(--color-border);
+  border-radius: var(--radius-lg);
+  background: var(--color-surface);
+  text-align: center;
+}
+
+.empty-state p {
+  margin-top: 0.6rem;
+  color: var(--color-ink-muted);
+}
+
+.back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  color: var(--color-brand-dark);
+  font-size: var(--text-sm);
+  font-weight: 700;
+}
+
+.room-detail__heading {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-block: 2.5rem 1.5rem;
+}
+
+.room-detail__heading h1 {
+  font-size: var(--text-3xl);
+}
+
+.room-gallery {
+  display: grid;
+  grid-template-columns: minmax(0, 1.65fr) minmax(0, 1fr);
+  gap: 0.75rem;
+}
+
+.room-gallery__feature,
+.room-gallery__image {
+  position: relative;
+  min-height: 15rem;
+  overflow: hidden;
+  border-radius: var(--radius-lg);
+  background: var(--color-brand-soft);
+}
+
+.room-gallery__feature {
+  min-height: 32rem;
+}
+
+.room-gallery__secondary {
+  display: grid;
+  grid-template-rows: repeat(2, minmax(0, 1fr));
+  gap: 0.75rem;
+}
+
+.room-detail__layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1.5fr) minmax(18rem, 0.75fr);
+  gap: 4rem;
+  margin-top: 4rem;
+}
+
+.room-detail__summary {
+  display: flex;
+  gap: 4rem;
+  padding-bottom: 2rem;
+  border-bottom: 0.0625rem solid var(--color-border);
+}
+
+.room-detail__price {
+  margin-top: 0.3rem;
+  color: var(--color-brand-dark);
+  font-size: var(--text-2xl);
+  font-weight: 800;
+}
+
+.room-detail__price small {
+  color: var(--color-ink-muted);
+  font-size: var(--text-sm);
+  font-weight: 500;
+}
+
+.room-detail__occupancy {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  margin-top: 0.55rem;
+  font-weight: 700;
+}
+
+.room-detail__occupancy svg {
+  color: var(--color-brand);
+}
+
+.detail-section {
+  padding-block: 2.5rem;
+  border-bottom: 0.0625rem solid var(--color-border);
+}
+
+.detail-section h2,
+.room-cta h2 {
+  font-size: var(--text-2xl);
+}
+
+.facility-list,
+.included-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.85rem 1rem;
+  margin-top: 1.5rem;
+}
+
+.facility-list span,
+.included-grid span {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  color: var(--color-ink-muted);
+  font-size: var(--text-sm);
+}
+
+.facility-list svg,
+.included-grid svg {
+  flex: 0 0 auto;
+  color: var(--color-success);
+}
+
+.room-cta {
+  align-self: start;
+  padding: 2rem;
+  border-radius: var(--radius-lg);
+  background: var(--color-brand);
+  color: var(--color-surface);
+  box-shadow: var(--shadow-md);
+}
+
+.room-cta .eyebrow {
+  color: var(--color-accent-soft);
+}
+
+.room-cta p:not(.eyebrow) {
+  margin-top: 1rem;
+  color: var(--color-brand-soft);
+}
+
+.room-cta__actions {
+  display: grid;
+  gap: 0.7rem;
+  margin-top: 1.5rem;
+}
+
+.room-cta .btn-primary {
+  background: var(--color-surface);
+  color: var(--color-brand-dark);
+}
+
+.room-cta .btn-primary:hover {
+  background: var(--color-accent-soft);
+}
+
+.room-cta .btn-secondary {
+  border-color: rgba(255, 255, 255, 0.35);
+  background: transparent;
+  color: var(--color-surface);
+}
+
+.room-cta .btn-secondary:hover {
+  border-color: var(--color-surface);
+  background: rgba(255, 255, 255, 0.12);
+}
+
+/* Contact form primitives keep labels, controls, and focus states consistent. */
+.form-field {
+  display: grid;
+  gap: 0.45rem;
+  color: var(--color-ink);
+  font-size: var(--text-sm);
+  font-weight: 700;
+}
+
+.form-field input,
+.form-field select,
+.form-field textarea {
+  width: 100%;
+  border: 0.0625rem solid var(--color-border);
+  border-radius: var(--radius-sm);
+  background: var(--color-surface-soft);
+  color: var(--color-ink);
+  font: inherit;
+  font-size: var(--text-sm);
+  font-weight: 400;
+  transition: border-color 180ms ease, background-color 180ms ease, box-shadow 180ms ease;
+}
+
+.form-field input,
+.form-field select {
+  min-height: 2.9rem;
+  padding: 0.65rem 0.8rem;
+}
+
+.form-field textarea {
+  min-height: 8rem;
+  padding: 0.7rem 0.8rem;
+  resize: vertical;
+}
+
+.form-field input::placeholder,
+.form-field textarea::placeholder {
+  color: var(--color-ink-muted);
+  opacity: 0.8;
+}
+
+.form-field input:focus,
+.form-field select:focus,
+.form-field textarea:focus {
+  border-color: var(--color-brand);
+  background: var(--color-surface);
+  outline: none;
+  box-shadow: var(--shadow-focus);
+}
+
+.contact-detail {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  padding: 1rem;
+  border: 0.0625rem solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: var(--color-surface);
+  transition: border-color 180ms ease, transform 180ms ease;
+}
+
+.contact-detail:hover {
+  border-color: var(--color-brand);
+  transform: translateY(-0.1rem);
+}
+
+.contact-detail__icon {
+  display: grid;
+  width: 2.6rem;
+  height: 2.6rem;
+  flex: 0 0 auto;
+  place-items: center;
+  border-radius: var(--radius-sm);
+  background: var(--color-brand-soft);
+  color: var(--color-brand-dark);
+}
+
+.contact-detail > span:last-child {
+  display: grid;
+  gap: 0.12rem;
+}
+
+.contact-detail small {
+  color: var(--color-ink-muted);
+  font-size: var(--text-xs);
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.contact-detail strong {
+  color: var(--color-ink);
+  font-size: var(--text-sm);
+}
+
+/* Homepage sections. They share the same visual vocabulary as the rooms flow. */
+.home-hero {
+  overflow: hidden;
+  background: var(--color-surface-warm);
+}
+
+.home-hero__grid {
+  display: grid;
+  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+  align-items: center;
+  gap: clamp(2rem, 6vw, 6rem);
+  min-height: min(48rem, calc(100vh - 4.75rem));
+  padding-block: clamp(4rem, 8vw, 7rem);
+}
+
+.home-hero__copy {
+  max-width: 34rem;
+}
+
+.home-hero h1 {
+  font-size: clamp(2.8rem, 5vw, 5.2rem);
+}
+
+.home-hero__subtext {
+  margin-top: 1.4rem;
+  color: var(--color-ink-muted);
+  font-size: var(--text-lg);
+}
+
+.home-hero__actions,
+.home-location__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.7rem;
+  margin-top: 2rem;
+}
+
+.home-hero__note {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  margin-top: 2.4rem;
+  color: var(--color-ink-muted);
+  font-size: var(--text-xs);
+  font-weight: 700;
+}
+
+.home-hero__status-dot {
+  width: 0.55rem;
+  height: 0.55rem;
+  border-radius: 50%;
+  background: var(--color-success);
+  box-shadow: 0 0 0 0.25rem var(--color-brand-soft);
+}
+
+.home-hero__visual {
+  position: relative;
+  min-height: clamp(23rem, 48vw, 38rem);
+  overflow: hidden;
+  border-radius: var(--radius-lg);
+  background: var(--color-brand-soft);
+  box-shadow: var(--shadow-md);
+}
+
+.home-hero__visual img {
+  object-fit: cover;
+}
+
+.home-hero__image-caption {
+  position: absolute;
+  right: 1rem;
+  bottom: 1rem;
+  left: 1rem;
+  display: grid;
+  gap: 0.15rem;
+  padding: 1rem;
+  border-radius: var(--radius-md);
+  background: rgba(23, 35, 41, 0.82);
+  color: var(--color-surface);
+}
+
+.home-hero__image-caption span {
+  color: var(--color-accent-soft);
+  font-size: var(--text-xs);
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.home-hero__image-caption strong {
+  font-family: var(--font-display);
+  font-size: var(--text-lg);
+}
+
+.home-benefits {
+  background: var(--color-surface);
+}
+
+.section-heading {
+  max-width: 42rem;
+}
+
+.section-heading h2,
+.home-location h2 {
+  font-size: var(--text-3xl);
+}
+
+.section-heading > p:last-child {
+  margin-top: 1rem;
+  color: var(--color-ink-muted);
+  font-size: var(--text-lg);
+}
+
+.benefit-grid {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 1rem;
+  margin-top: 3rem;
+}
+
+.benefit-card {
+  padding: 1.35rem;
+  border: 0.0625rem solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: var(--color-surface-soft);
+}
+
+.benefit-card__icon {
+  display: grid;
+  width: 2.7rem;
+  height: 2.7rem;
+  place-items: center;
+  border-radius: var(--radius-sm);
+  background: var(--color-brand-soft);
+  color: var(--color-brand-dark);
+}
+
+.benefit-card h3 {
+  margin-top: 1.35rem;
+  font-family: var(--font-sans);
+  font-size: var(--text-base);
+}
+
+.benefit-card p {
+  margin-top: 0.45rem;
+  color: var(--color-ink-muted);
+  font-size: var(--text-sm);
+}
+
+.home-featured-rooms {
+  background: var(--color-surface-soft);
+}
+
+.section-heading--split {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  max-width: none;
+  gap: 1rem;
+}
+
+.text-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  color: var(--color-brand-dark);
+  font-size: var(--text-sm);
+  font-weight: 800;
+}
+
+.text-link:hover,
+.back-link:hover {
+  color: var(--color-brand);
+}
+
+.featured-room-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1.25rem;
+  margin-top: 2.5rem;
+}
+
+.featured-room-card {
+  overflow: hidden;
+  border: 0.0625rem solid var(--color-border);
+  border-radius: var(--radius-lg);
+  background: var(--color-surface);
+  box-shadow: var(--shadow-sm);
+}
+
+.featured-room-card__image {
+  position: relative;
+  aspect-ratio: 1.3;
+  overflow: hidden;
+  background: var(--color-brand-soft);
+}
+
+.featured-room-card__image img {
+  object-fit: cover;
+  transition: transform 300ms ease;
+}
+
+.featured-room-card:hover .featured-room-card__image img {
+  transform: scale(1.03);
+}
+
+.featured-room-card__body {
+  padding: 1.25rem;
+}
+
+.featured-room-card h3 {
+  margin-top: 0.4rem;
+  font-size: var(--text-xl);
+}
+
+.featured-room-card__meta {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.6rem;
+  margin-block: 1rem 1.25rem;
+  color: var(--color-ink-muted);
+  font-size: var(--text-sm);
+}
+
+.featured-room-card__meta span {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.featured-room-card__meta svg {
+  color: var(--color-brand);
+}
+
+.featured-room-card__meta strong {
+  color: var(--color-ink);
+}
+
+.featured-room-card .btn-secondary {
+  width: 100%;
+}
+
+.home-location {
+  background: var(--color-surface-warm);
+}
+
+.home-location__grid {
+  display: grid;
+  grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
+  align-items: center;
+  gap: clamp(2rem, 7vw, 7rem);
+}
+
+.home-location__copy > p:not(.eyebrow) {
+  max-width: 32rem;
+  margin-top: 1rem;
+  color: var(--color-ink-muted);
+  font-size: var(--text-lg);
+}
+
+.map-placeholder {
+  display: grid;
+  min-height: 20rem;
+  place-content: center;
+  justify-items: center;
+  gap: 0.45rem;
+  padding: 2rem;
+  border: 0.0625rem solid var(--color-border);
+  border-radius: var(--radius-lg);
+  background-color: var(--color-surface-soft);
+  background-image: linear-gradient(var(--color-border) 0.0625rem, transparent 0.0625rem), linear-gradient(90deg, var(--color-border) 0.0625rem, transparent 0.0625rem);
+  background-size: 2rem 2rem;
+  color: var(--color-ink-muted);
+  text-align: center;
+}
+
+.map-placeholder__pin {
+  display: grid;
+  width: 3.3rem;
+  height: 3.3rem;
+  place-items: center;
+  margin-bottom: 0.45rem;
+  border-radius: 50%;
+  background: var(--color-brand);
+  color: var(--color-surface);
+  box-shadow: var(--shadow-md);
+}
+
+.map-placeholder strong {
+  color: var(--color-ink);
+  font-family: var(--font-display);
+  font-size: var(--text-xl);
+}
+
+.map-placeholder a {
+  margin-top: 0.6rem;
+  color: var(--color-brand-dark);
+  font-size: var(--text-sm);
+  font-weight: 800;
+}
+
+@media (max-width: 47.99rem) {
+  .site-nav__desktop-cta {
+    display: none;
+  }
+
+  .site-nav__menu-toggle {
+    display: inline-grid;
+    width: 2.8rem;
+    height: 2.8rem;
+    place-items: center;
+    border: 0.0625rem solid var(--color-border);
+    border-radius: var(--radius-md);
+    background: var(--color-surface);
+    color: var(--color-brand-dark);
+    cursor: pointer;
+  }
+
+  .site-nav__links {
+    position: absolute;
+    top: calc(100% + 0.5rem);
+    right: 1rem;
+    left: 1rem;
+    display: none;
+    align-items: stretch;
+    gap: 0;
+    padding: 0.7rem;
+    border: 0.0625rem solid var(--color-border);
+    border-radius: var(--radius-lg);
+    background: var(--color-surface);
+    box-shadow: var(--shadow-md);
+  }
+
+  .site-nav__links--open {
+    display: grid;
+  }
+
+  .site-nav__link {
+    padding: 0.8rem;
+  }
+
+  .site-nav__mobile-cta {
+    display: inline-flex;
+    margin-top: 0.4rem;
+  }
+
+  .site-footer__grid {
+    grid-template-columns: 1fr;
+    gap: 2.25rem;
+  }
+
+  .site-footer__bottom {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .rooms-toolbar,
+  .rooms-results-heading,
+  .room-detail__heading {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .rooms-toolbar__intro {
+    margin-right: 0;
+  }
+
+  .filter-control {
+    width: 100%;
+  }
+
+  .room-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .rooms-results-heading__hint {
+    display: none;
+  }
+
+  .room-gallery {
+    grid-template-columns: 1fr;
+  }
+
+  .room-gallery__feature {
+    min-height: 20rem;
+  }
+
+  .room-gallery__secondary {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-rows: none;
+  }
+
+  .room-gallery__image {
+    min-height: 10rem;
+  }
+
+  .room-detail__layout {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    margin-top: 2rem;
+  }
+
+  .room-detail__summary {
+    gap: 2rem;
+  }
+
+  .facility-list,
+  .included-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .home-hero__grid,
+  .home-location__grid {
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+  }
+
+  .home-hero__grid {
+    min-height: auto;
+  }
+
+  .home-hero__visual {
+    min-height: 24rem;
+  }
+
+  .benefit-grid,
+  .featured-room-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .section-heading--split {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .home-location__grid {
+    gap: 2rem;
+  }
+}
+
+/* Small-screen defaults keep all shared content comfortably readable. */
+@media (min-width: 48rem) {
+  .container {
+    width: min(calc(100% - 4rem), var(--content-width));
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+  }
+}
