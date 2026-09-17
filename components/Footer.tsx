@@ -45,15 +45,15 @@ export function Footer() {
           <address className="site-footer__contact">
             <a href="https://maps.google.com" target="_blank" rel="noreferrer">
               <MapPin size={17} aria-hidden="true" />
-              <span>24 Campus Road, Your City</span>
+              <span>Saharanpur</span>
             </a>
-            <a href="tel:+910000000000">
+            <a href="tel:+919458755000">
               <Phone size={17} aria-hidden="true" />
-              <span>+91 00000 00000</span>
+              <span>+919458755000</span>
             </a>
             <a href="mailto:hello@harborhouse.example">
               <Mail size={17} aria-hidden="true" />
-              <span>hello@harborhouse.example</span>
+              <span>khurshidbcpnb@gmail.com</span>
             </a>
             <a href="https://wa.me/910000000000" target="_blank" rel="noreferrer">
               <span className="site-footer__contact-icon" aria-hidden="true">W</span>
